@@ -5,16 +5,16 @@ const morgan = require("morgan");
 const { init: initDB, Counter } = require("./db");
 const tcb = require('@cloudbase/node-sdk')
 
+const { secretId, secretKey, cloudEnv } = process.env
+
 // 初始化云开发
 const app1 = tcb.init({
-  secretId: "AKIDAuObYUndR8cIjs8a8Ta6PTGn7C3hwhz8",
-  secretKey: "AzcptuLgqrHW4Sjtuk6LgYGpLfnlzqX3",
-  env: "cloudbase-prepaid-8eqh90441a925f"
+  secretId: secretId,
+  secretKey: secretKey,
+  env: cloudEnv
 })
 
-// 初始化auth对象
-const auth = app1.auth()
-
+const db = app1.database()
 const logger = morgan("tiny");
 
 const app = express();
@@ -60,9 +60,10 @@ app.get("/api/wx_openid", async (req, res) => {
   }
 });
 
-const db = app1.database()
+
 
 // test API
+// 返回指定openid的用户信息
 app.get("/api/data", async (req, res) => {
   const collection = db.collection('UMEL_MainUser')
   const result = await collection.where({
