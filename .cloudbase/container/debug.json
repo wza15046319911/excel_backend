@@ -1,15 +1,15 @@
 {
   "containers": [
     {
-      "name": "wxcloudrun-express-main",
+      "name": "excel_backend",
       "domain": "",
       "ip": ""
     }
   ],
   "config": {
-    "wxcloudrun-express-main": {
-      "containerPort": 80,
+    "excel_backend": {
       "dockerfilePath": "Dockerfile",
+      "containerPort": 80,
       "buildDir": "",
       "minNum": 0,
       "maxNum": 5,

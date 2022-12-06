@@ -23,6 +23,14 @@ app.use(express.json());
 app.use(cors());
 app.use(logger);
 
+// 设置跨域访问
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://excel-frontend-1763036-1302668990.ap-shanghai.run.tcloudbase.com"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
 // 首页
 app.get("/", async (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
